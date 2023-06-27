@@ -1,7 +1,7 @@
 import { makeProject } from '@motion-canvas/core';
 
-import stack from '../scenes/stack?scene';
+import queue from '../scenes/queue?scene';
 
 export default makeProject({
-  scenes: [stack],
+  scenes: [queue],
 });

@@ -21,9 +21,9 @@ export default makeScene2D(function*(view) {
       ref={topRef}
       fill={"#f8f8f2"}
       x={-700}
-      y={stackRef[stackRef.length - 1].y() + 100}
+      y={stackRef[stackRef.length - 1].y()}
     >
-      {"Top ->"}
+      Top &rarr;
     </Txt >
   );
 
@@ -49,7 +49,7 @@ export default makeScene2D(function*(view) {
   view.add(
     <Txt
       fill={"#f8f8f2"}
-      x={200}
+      x={0}
       y={-400}
       fontSize={100}
     >
@@ -80,7 +80,7 @@ export default makeScene2D(function*(view) {
   yield* all(
     rectRefs[0].x(stackRef[stackRef.length - 1].x(), 1),
     rectRefs[0].y(stackRef[stackRef.length - 1].y(), 1),
-    topRef().position.y(stackRef[stackRef.length - 1].y(), 1),
+    // topRef().position.y(stackRef[stackRef.length - 1].y(), 1),
     codeRef().selection(lines(0), 1),
   );
   // Push 20

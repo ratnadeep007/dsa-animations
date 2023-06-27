@@ -1,5 +1,5 @@
 
-import { Circle, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
+import { Circle, Node, Layout, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
 import { all, createRef, makeRef, PossibleSpacing, range, Reference, SignalValue, ThreadGenerator, waitFor, waitUntil } from '@motion-canvas/core';
 import { CodeBlock, lines } from '@motion-canvas/2d/lib/components/CodeBlock';
 
@@ -8,9 +8,7 @@ export default makeScene2D(function*(view) {
   const rectRefs: Rect[] = [];
   const queueRef: Rect[] = [];
   const headRef = createRef<Txt>();
-  const tailRef = createRef<Txt>();
-  const headArrowRef = createRef<Txt>();
-  const tailArrowRef = createRef<Txt>();
+  const tailRef = createRef<Node>();
   const codeRef = createRef<CodeBlock>();
 
   // Set baackground color
@@ -21,47 +19,45 @@ export default makeScene2D(function*(view) {
 
   // Add head
   view.add(
-    <Txt
-      ref={headRef}
-      fill={"#f8f8f2"}
-      x={queueRef[0].x()}
-      y={-150}
-    >
-      Head
-    </Txt >
+    <Layout direction={"column"} alignItems={"center"} layout>
+      <Node
+        ref={headRef}
+        x={queueRef[0].x()}
+        y={-150}
+      >
+        <Txt
+          fill={"#f8f8f2"}
+        >
+          Head
+        </Txt >
+        <Txt
+          fill={"#f8f8f2"}
+        >
+          &darr;
+        </Txt >
+      </Node>
+    </Layout>
   );
-  view.add(
-    <Txt
-      ref={headArrowRef}
-      fill={"#f8f8f2"}
-      x={queueRef[0].x()}
-      y={-100}
-    >
-      &darr;
-    </Txt >
-  );
-
 
   // Add tail
   view.add(
-    <Txt
-      ref={tailRef}
-      fill={"#f8f8f2"}
-      x={queueRef[0].x()}
-      y={200}
-    >
-      Tail
-    </Txt >
-  );
-  view.add(
-    <Txt
-      ref={tailArrowRef}
-      fill={"#f8f8f2"}
-      x={queueRef[0].x()}
-      y={150}
-    >
-      &uarr;
-    </Txt >
+    <Layout direction={"column"} alignItems={"center"} layout>
+      <Node
+        ref={tailRef}
+        x={queueRef[0].x()}
+        y={200}>
+        <Txt
+          fill={"#f8f8f2"}
+        >
+          &uarr;
+        </Txt >
+        <Txt
+          fill={"#f8f8f2"}
+        >
+          Tail
+        </Txt >
+      </Node>
+    </Layout>
   );
 
   view.add(
@@ -124,14 +120,13 @@ export default makeScene2D(function*(view) {
     rectRefs[1].x(queueRef[1].x(), 1),
     rectRefs[1].y(queueRef[1].y(), 1),
     tailRef().position.x(queueRef[1].x(), 1),
-    tailArrowRef().position.x(queueRef[1].x(), 1),
+    // tailArrowRef().position.x(queueRef[1].x(), 1),
     codeRef().selection(lines(1), 1),
   );
   // Dequeue
   yield* all(
     rectRefs[0].x(-3000, 1),
     headRef().position.x(queueRef[1].x(), 1),
-    headArrowRef().position.x(queueRef[1].x(), 1),
     codeRef().selection(lines(2), 1),
   );
   // Enqueue 30
@@ -139,14 +134,13 @@ export default makeScene2D(function*(view) {
     rectRefs[2].x(queueRef[2].x(), 1),
     rectRefs[2].y(queueRef[2].y(), 1),
     tailRef().position.x(queueRef[2].x(), 1),
-    tailArrowRef().position.x(queueRef[2].x(), 1),
+    // tailArrowRef().position.x(queueRef[2].x(), 1),
     codeRef().selection(lines(3), 1),
   );
   // Dequeue
   yield* all(
     rectRefs[1].x(-3000, 1),
     headRef().position.x(queueRef[2].x(), 1),
-    headArrowRef().position.x(queueRef[2].x(), 1),
     codeRef().selection(lines(4), 1),
   );
   // Enqueue 40
@@ -154,7 +148,7 @@ export default makeScene2D(function*(view) {
     rectRefs[3].x(queueRef[3].x(), 1),
     rectRefs[3].y(queueRef[3].y(), 1),
     tailRef().position.x(queueRef[3].x(), 1),
-    tailArrowRef().position.x(queueRef[3].x(), 1),
+    // tailArrowRef().position.x(queueRef[3].x(), 1),
     codeRef().selection(lines(5), 1),
   );
   // Enqueue 50
@@ -162,21 +156,19 @@ export default makeScene2D(function*(view) {
     rectRefs[4].x(queueRef[4].x(), 1),
     rectRefs[4].y(queueRef[4].y(), 1),
     tailRef().position.x(queueRef[4].x(), 1),
-    tailArrowRef().position.x(queueRef[4].x(), 1),
+    // tailArrowRef().position.x(queueRef[4].x(), 1),
     codeRef().selection(lines(6), 1),
   );
   // Dequeue
   yield* all(
     rectRefs[2].x(-3000, 1),
     headRef().position.x(queueRef[3].x(), 1),
-    headArrowRef().position.x(queueRef[3].x(), 1),
     codeRef().selection(lines(7), 1),
   );
   // Dequeue
   yield* all(
     rectRefs[3].x(-3000, 1),
     headRef().position.x(queueRef[4].x(), 1),
-    headArrowRef().position.x(queueRef[4].x(), 1),
     codeRef().selection(lines(8), 1),
   );
 });

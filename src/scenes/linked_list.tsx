@@ -1,5 +1,5 @@
 import { Circle, Node, Layout, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
-import { all, createRef, makeRef, range, Reference, Subscribable } from '@motion-canvas/core';
+import { all, createRef, makeRef, range, Reference, Subscribable, waitFor } from '@motion-canvas/core';
 
 
 export default makeScene2D(function*(view) {
@@ -112,6 +112,7 @@ export default makeScene2D(function*(view) {
   yield* subtitleRef().fontSize(0, 0.5);
   // end of insert at begining
 
+  yield* waitFor(1);
 
   // remove from begining
   yield* subtitleRef().text("Delete (at begining)", 1);
@@ -121,8 +122,52 @@ export default makeScene2D(function*(view) {
     newNodeRef().position.y(300, 1),
     headRef().position.x(listRef[0].position.x() - 200, 1),
   );
+  yield* subtitleRef().fontSize(0, 0.5);
   // delete at begining
 
+  yield* waitFor(1);
+
+  // insert at end
+  subtitleRef().text("Insert (at end)");
+  yield* subtitleRef().fontSize(60, 1);
+  yield* newNodeRef().scale(1, 1);
+  yield* all(
+    tempRef().fontSize(50, 1),
+    tempRef().position.x(newNodeRef().position.x() - 200, 1),
+    tempRef().position.y(newNodeRef().position.y() + 10, 1),
+  );
+  yield* all(
+    tempRef().position.x(listRef[listRef.length - 1].position.x() + listRef[listRef.length - 1].width() + 80, 1),
+    tempRef().position.y(listRef[listRef.length - 1].position.y() + 10, 1),
+    newNodeRef().position.x(listRef[listRef.length - 1].position.x() + listRef[listRef.length - 1].width() + tempRef().width() + 100, 1),
+    newNodeRef().position.y(listRef[listRef.length - 1].position.y(), 1),
+    nullRef().position.x(nullRef().position.x() + listRef[listRef.length - 1].width() + tempRef().width() + 50, 1),
+    nullRef().rotation(90, 1),
+  );
+  yield* all(
+    tempRef().position.y(tempRef().position.y() + 300, 1),
+    tempRef().fontSize(0, 1),
+    newNodeRef().position.x(newNodeRef().position.x() - tempRef().width() - 50, 1),
+    nullRef().position.x(nullRef().position.x() - (newNodeRef().width() + 20), 1),
+    nullRef().rotation(-360, 1),
+  );
+  yield* subtitleRef().fontSize(0, 0.5);
+  // end of insert at end
+
+  yield* waitFor(1);
+
+  // delete at end
+  subtitleRef().text("Delete (at end)");
+  yield* subtitleRef().fontSize(60, 1);
+  yield* all(
+    newNodeRef().position.x(0, 1),
+    newNodeRef().position.y(300, 1),
+    nullRef().position.x(nullRef().position.x() - newNodeRef().width() - 20, 1),
+  );
+  yield* subtitleRef().fontSize(0, 0.5);
+  // end of delete at end
+
+  yield* waitFor(2);
 });
 
 function createList(values: number[], listRef: Rect[]) {

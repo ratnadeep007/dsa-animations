@@ -7,7 +7,8 @@ export default defineConfig({
     motionCanvas({
       project: [
         './src/projects/stack.ts',
-        './src/projects/queue.ts'
+        './src/projects/queue.ts',
+        './src/projects/linked_list.ts'
       ]
     }),
     ffmpeg(),

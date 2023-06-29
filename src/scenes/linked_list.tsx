@@ -168,6 +168,62 @@ export default makeScene2D(function*(view) {
   yield* subtitleRef().fontSize(0, 0.5);
   // end of delete at end
 
+  yield* waitFor(1);
+
+  // start of insert in between nodes
+  subtitleRef().text("Insert (in between nodes)");
+  yield* subtitleRef().fontSize(60, 1);
+  yield* newNodeRef().scale(1, 1);
+  yield* all(
+    tempRef().fontSize(50, 1),
+    tempRef().position.x(tempRef().position.x() - 730, 1),
+  );
+  yield* all(
+    headRef().position.x(headRef().position.x() - 400, 1),
+    listRef[0].position.x(listRef[0].position.x() - 400, 1),
+    listRef[1].position.x(listRef[1].position.x() - 400, 1),
+    listRef[2].position.x(listRef[2].position.x() + 100, 1),
+    nullRef().position.x(nullRef().position.x() + 100, 1),
+    tempRef().position.y(tempRef().position.y() - 300, 1),
+    tempRef().position.x(tempRef().position.x() + 100, 1),
+    newNodeRef().position.y(newNodeRef().position.y() - 300, 1),
+    newNodeRef().position.x(newNodeRef().position.x() + 100, 1),
+  );
+  yield* all(
+    tempRef().rotation(45, 1),
+    tempRef().position.x(tempRef().position.x() + 30, 1),
+    tempRef().position.y(tempRef().position.y() - 150, 1),
+    headRef().position.x(headRef().position.x() + 250, 1),
+    listRef[0].position.x(listRef[0].position.x() + 250, 1),
+    listRef[1].position.x(listRef[1].position.x() + 250, 1),
+  );
+  yield* tempRef().fontSize(0, 1);
+  yield* subtitleRef().fontSize(0, 0.5);
+  // end of insert in between nodes
+
+  yield* waitFor(1);
+
+  // start of delete in between nodes
+  subtitleRef().text("Delete (in between nodes)");
+  yield* subtitleRef().fontSize(60, 1);
+  yield* all(
+    newNodeRef().rotation(-60, 1),
+    newNodeRef().position.y(newNodeRef().position.y() + 200, 1),
+    newNodeRef().position.x(newNodeRef().position.x() - 150, 1),
+    listRef[2].position.x(listRef[2].position.x() - 250, 1),
+    nullRef().position.x(nullRef().position.x() - 250, 1),
+  );
+  yield* all(
+    newNodeRef().position.y(1000, 1),
+    headRef().position.x(headRef().position.x() + 200, 1),
+    listRef[0].position.x(listRef[0].position.x() + 200, 1),
+    listRef[1].position.x(listRef[1].position.x() + 200, 1),
+    listRef[2].position.x(listRef[2].position.x() + 200, 1),
+    nullRef().position.x(nullRef().position.x() + 200, 1),
+  );
+  yield* subtitleRef().fontSize(0, 0.5);
+  // end of delete in between nodes
+
   yield* waitFor(2);
 });
 

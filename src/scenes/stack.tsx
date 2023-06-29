@@ -1,6 +1,7 @@
 import { Circle, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
 import { all, createRef, makeRef, PossibleSpacing, range, Reference, SignalValue, ThreadGenerator, waitFor, waitUntil } from '@motion-canvas/core';
 import { CodeBlock, lines } from '@motion-canvas/2d/lib/components/CodeBlock';
+import { DraculaColors } from '../utils/colors';
 
 export default makeScene2D(function*(view) {
   const stackValues = [10, 20, 30, 40, 50];
@@ -10,7 +11,7 @@ export default makeScene2D(function*(view) {
   const codeRef = createRef<CodeBlock>();
 
   // Set baackground color
-  view.fill("#282a36");
+  view.fill(DraculaColors.Background);
 
   // Create stack
   view.add(createStack(stackRef));
@@ -19,7 +20,7 @@ export default makeScene2D(function*(view) {
   view.add(
     <Txt
       ref={topRef}
-      fill={"#f8f8f2"}
+      fill={DraculaColors.Foreground}
       x={-700}
       y={stackRef[stackRef.length - 1].y()}
     >
@@ -48,7 +49,7 @@ export default makeScene2D(function*(view) {
 
   view.add(
     <Txt
-      fill={"#f8f8f2"}
+      fill={DraculaColors.Foreground}
       x={0}
       y={-400}
       fontSize={100}
@@ -66,12 +67,12 @@ export default makeScene2D(function*(view) {
         height={100}
         x={-150 + 200 * i}
         y={-200}
-        fill="#ff5555"
+        fill={DraculaColors.Red}
         radius={10}
         textAlign="center"
         alignItems="center"
       >
-        <Txt fill={"#f8f8f2"}>{stackValues[i].toString()}</Txt>
+        <Txt fill={DraculaColors.Foreground}>{stackValues[i].toString()}</Txt>
       </Rect>
     )
   )
@@ -149,7 +150,7 @@ function createStack(stackRef: Rect[]) {
     return (
       <Rect>
         <Txt
-          fill={"white"}
+          fill={DraculaColors.Foreground}
           x={-600}
           y={-300 + 130 * i}
         >
@@ -157,7 +158,7 @@ function createStack(stackRef: Rect[]) {
         </Txt>
         <Rect
           ref={makeRef(stackRef, i)}
-          fill="#50fa7b"
+          fill={DraculaColors.Green}
           width={125}
           height={125}
           radius={radius}

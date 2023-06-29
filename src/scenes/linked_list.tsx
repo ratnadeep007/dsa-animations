@@ -1,5 +1,6 @@
 import { Circle, Node, Layout, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
 import { all, createRef, makeRef, range, Reference, Subscribable, waitFor } from '@motion-canvas/core';
+import { DraculaColors } from '../utils/colors';
 
 
 export default makeScene2D(function*(view) {
@@ -12,12 +13,12 @@ export default makeScene2D(function*(view) {
   const nullRef = createRef<Txt>();
 
   // Set background color
-  view.fill("#282a36");
+  view.fill(DraculaColors.Background);
 
   // Draw text
   view.add(
     <Txt
-      fill={"#f8f8f2"}
+      fill={DraculaColors.Foreground}
       x={0}
       y={-400}
       fontSize={100}
@@ -33,7 +34,7 @@ export default makeScene2D(function*(view) {
   view.add(
     <Txt
       ref={headRef}
-      fill="#f8f8f2"
+      fill={DraculaColors.Foreground}
       x={listRef[0].position.x() - 200}
       y={listRef[0].position.y()}
     >
@@ -45,7 +46,7 @@ export default makeScene2D(function*(view) {
   view.add(
     <Txt
       ref={nullRef}
-      fill="#f8f8f2"
+      fill={DraculaColors.Foreground}
       x={listRef[listRef.length - 1].position.x() + 250}
       y={listRef[listRef.length - 1].position.y()}
     >
@@ -57,7 +58,7 @@ export default makeScene2D(function*(view) {
   view.insert(
     <Txt
       ref={subtitleRef}
-      fill="#f8f8f2"
+      fill={DraculaColors.Foreground}
       x={0}
       y={-250}
       fontSize={0}
@@ -74,7 +75,7 @@ export default makeScene2D(function*(view) {
   view.insert(
     <Txt
       ref={tempRef}
-      fill="#f8f8f2"
+      fill={DraculaColors.Foreground}
       x={newNodeRef().position.x()}
       y={newNodeRef().position.y()}
       fontSize={0}
@@ -180,7 +181,7 @@ function createNode(value: string, x: number, y: number, offset: number, rectRef
   return (
     <Rect
       ref={index !== null ? makeRef(listRef, index) : rectRef}
-      fill="#50fa7b"
+      fill={DraculaColors.Green}
       radius={[10, 10, 10, 10]}
       width={200}
       height={100}
@@ -188,9 +189,9 @@ function createNode(value: string, x: number, y: number, offset: number, rectRef
       x={-x + offset * index}
       y={-y}
     >
-      <Txt x={0} y={0} fill="#44475a">{value}</Txt>
+      <Txt x={0} y={0} fill={DraculaColors.CurrentLine}>{value}</Txt>
       <Txt
-        fill="#50fa7b"
+        fill={DraculaColors.Green}
         fontSize={90}
         x={120}
         y={10}

@@ -2,6 +2,7 @@
 import { Circle, Node, Layout, makeScene2D, Rect, Txt } from '@motion-canvas/2d';
 import { all, createRef, makeRef, PossibleSpacing, range, Reference, SignalValue, ThreadGenerator, waitFor, waitUntil } from '@motion-canvas/core';
 import { CodeBlock, lines } from '@motion-canvas/2d/lib/components/CodeBlock';
+import { DraculaColors } from '../utils/colors';
 
 export default makeScene2D(function*(view) {
   const queueValues = [10, 20, 30, 40, 50];
@@ -12,7 +13,7 @@ export default makeScene2D(function*(view) {
   const codeRef = createRef<CodeBlock>();
 
   // Set baackground color
-  view.fill("#282a36");
+  view.fill(DraculaColors.Background);
 
   // Create stack
   view.add(createQueue(queueRef));
@@ -26,12 +27,12 @@ export default makeScene2D(function*(view) {
         y={-150}
       >
         <Txt
-          fill={"#f8f8f2"}
+          fill={DraculaColors.Foreground}
         >
           Head
         </Txt >
         <Txt
-          fill={"#f8f8f2"}
+          fill={DraculaColors.Foreground}
         >
           &darr;
         </Txt >
@@ -47,12 +48,12 @@ export default makeScene2D(function*(view) {
         x={queueRef[0].x()}
         y={200}>
         <Txt
-          fill={"#f8f8f2"}
+          fill={DraculaColors.Foreground}
         >
           &uarr;
         </Txt >
         <Txt
-          fill={"#f8f8f2"}
+          fill={DraculaColors.Foreground}
         >
           Tail
         </Txt >
@@ -81,7 +82,7 @@ export default makeScene2D(function*(view) {
 
   view.add(
     <Txt
-      fill={"#f8f8f2"}
+      fill={DraculaColors.Foreground}
       x={0}
       y={-400}
       fontSize={100}
@@ -99,12 +100,12 @@ export default makeScene2D(function*(view) {
         height={100}
         x={150}
         y={-150 + 120 * i}
-        fill="#ff5555"
+        fill={DraculaColors.Red}
         radius={10}
         textAlign="center"
         alignItems="center"
       >
-        <Txt fill={"#f8f8f2"}>{queueValues[i].toString()}</Txt>
+        <Txt fill={DraculaColors.Foreground}>{queueValues[i].toString()}</Txt>
       </Rect>
     )
   );
@@ -185,7 +186,7 @@ function createQueue(queueRef: Rect[]) {
     return (
       <Rect>
         <Txt
-          fill={"white"}
+          fill={DraculaColors.Foreground}
           x={-750 + 130 * i}
           y={-50}
         >
@@ -193,7 +194,7 @@ function createQueue(queueRef: Rect[]) {
         </Txt>
         <Rect
           ref={makeRef(queueRef, i)}
-          fill="#50fa7b"
+          fill={DraculaColors.Green}
           width={125}
           height={125}
           radius={radius}
